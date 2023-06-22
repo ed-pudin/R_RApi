@@ -1,4 +1,5 @@
 ﻿
+using Newtonsoft.Json;
 using R_RApi.DataAccessLayer.Queries;
 using System.Data.SqlClient;
 
@@ -25,14 +26,18 @@ namespace R_RApi.DataAccessLayer.Mapper
             _command.Parameters.AddWithValue("@password", password);
 
             _reader = _command.ExecuteReader();
-            if (_reader != null ) {
-                return new string("Si");
+            if (_reader.Read()) {
+                return JsonConvert.SerializeObject(new
+                {
+                    status = 1
+                });
             }
-            else
-            {
-                return new string("No");
+            else {
+                return JsonConvert.SerializeObject(new
+                {
+                    status = 0
+                });
             }
-
         }
     }
 }

@@ -7,8 +7,8 @@ namespace R_RApi.ApplicationLayer.Controllers
     [Route("[controller]")]
     public class LoginController : ControllerBase
     {
-        [HttpPost]
-        [Route("login")]
+        [HttpPost(Name = "login")]
+        //[Route("login")]
         public string login(string email, string pass)
         {
 
