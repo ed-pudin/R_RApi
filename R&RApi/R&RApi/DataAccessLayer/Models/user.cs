@@ -1,4 +1,4 @@
-﻿namespace R_RApi.DomainLayer.Entidades
+﻿namespace R_RApi.DataAccessLayer.Models
 {
     public class user
     {

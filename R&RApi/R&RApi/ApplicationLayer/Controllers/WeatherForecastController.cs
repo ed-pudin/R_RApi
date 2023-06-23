@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using R_RApi.DataAccessLayer.Models;
 
 namespace R_RApi.Controllers
 {

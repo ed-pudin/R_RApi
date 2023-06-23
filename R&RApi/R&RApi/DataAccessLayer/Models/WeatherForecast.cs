@@ -1,4 +1,4 @@
-namespace R_RApi
+namespace R_RApi.DataAccessLayer.Models
 {
     public class WeatherForecast
     {

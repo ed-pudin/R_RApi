@@ -1,5 +1,5 @@
 ﻿using R_RApi.DataAccessLayer.Mapper;
-using R_RApi.DomainLayer.Entidades;
+using R_RApi.DataAccessLayer.Models;
 using R_RApi.DomainLayer.Services;
 
 namespace R_RApi.ApplicationLayer.Servicios

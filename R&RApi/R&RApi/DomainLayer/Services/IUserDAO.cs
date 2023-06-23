@@ -1,4 +1,4 @@
-﻿using R_RApi.DomainLayer.Entidades;
+﻿using R_RApi.DataAccessLayer.Models;
 
 namespace R_RApi.DomainLayer.Services
 {

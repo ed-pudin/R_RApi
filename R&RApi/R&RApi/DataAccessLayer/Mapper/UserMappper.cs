@@ -1,6 +1,8 @@
 ﻿
 using Newtonsoft.Json;
+using R_RApi.DataAccessLayer.Models;
 using R_RApi.DataAccessLayer.Queries;
+using R_RApi.InfrastructureLayer.Authentication;
 using System.Data.SqlClient;
 
 namespace R_RApi.DataAccessLayer.Mapper
@@ -19,6 +21,7 @@ namespace R_RApi.DataAccessLayer.Mapper
         }
         public string login(string email, string password)
         {
+            
             _connection.Open();
             _command = new SqlCommand(_query.login(), _connection);
 
@@ -27,9 +30,21 @@ namespace R_RApi.DataAccessLayer.Mapper
 
             _reader = _command.ExecuteReader();
             if (_reader.Read()) {
+
+                user user = new user();
+                user.id = _reader["id"].ToString();
+                user.name = _reader["name"].ToString();
+                user.lastname = _reader["lastname"].ToString();
+                user.email = _reader["email"].ToString();
+                user.password = _reader["password"].ToString();
+                user.rol = _reader["rol"].ToString();
+
+                Auth authorization = new Auth(user);
+
                 return JsonConvert.SerializeObject(new
                 {
-                    status = 1
+                    status = 1,
+                    token = authorization.token
                 });
             }
             else {
