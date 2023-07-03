@@ -1,3 +1,9 @@
+CREATE DATABASE RRDB
+go
+
+USE RRDB
+go
+
 CREATE TABLE [user] (
   [id] char(36) PRIMARY KEY NOT NULL DEFAULT NEWID(),
   [name] varchar(50) NOT NULL,
