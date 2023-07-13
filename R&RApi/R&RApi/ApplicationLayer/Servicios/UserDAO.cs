@@ -6,9 +6,11 @@ namespace R_RApi.ApplicationLayer.Servicios
 {
     public class UserDAO : IUserDAO
     {
-        public string agregarUsuario(user u)
+        public string signUp(user u)
         {
-            throw new NotImplementedException();
+            UserMappper mapper = new UserMappper();
+            return mapper.signup(u);
+
         }
 
         public string login(string email, string pass)

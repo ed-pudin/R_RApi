@@ -4,6 +4,7 @@ using R_RApi.DataAccessLayer.Models;
 using R_RApi.DataAccessLayer.Queries;
 using R_RApi.InfrastructureLayer.Authentication;
 using System.Data.SqlClient;
+using System.Net;
 
 namespace R_RApi.DataAccessLayer.Mapper
 {
@@ -48,6 +49,32 @@ namespace R_RApi.DataAccessLayer.Mapper
                 });
             }
             else {
+                return JsonConvert.SerializeObject(new
+                {
+                    status = 0
+                });
+            }
+        }
+        public string signup(user u)
+        {
+            _connection.Open();
+            _command = new SqlCommand(_query.signup(u), _connection);
+
+            _command.Parameters.AddWithValue("@name", u.name);
+            _command.Parameters.AddWithValue("@lastname", u.lastname);
+            _command.Parameters.AddWithValue("@email", u.email);
+            _command.Parameters.AddWithValue("@password", u.password);
+            _command.Parameters.AddWithValue("@rol", "client");
+
+            if (_command.ExecuteNonQuery() > 0)
+            {
+                return JsonConvert.SerializeObject(new
+                {
+                    status = 1,
+                });
+            }
+            else
+            {
                 return JsonConvert.SerializeObject(new
                 {
                     status = 0
