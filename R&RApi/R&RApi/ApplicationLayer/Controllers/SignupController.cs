@@ -15,6 +15,7 @@ namespace R_RApi.ApplicationLayer.Controllers
         [HttpPost(Name = "Registro")]
         public string signUp(user u)
         {
+            //Obtener rol del token
             u.rol = "client";
             UserDAO userDAO = new UserDAO();
             return new string(userDAO.signUp(u));

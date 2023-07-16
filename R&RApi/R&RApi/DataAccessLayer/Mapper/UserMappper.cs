@@ -91,7 +91,35 @@ namespace R_RApi.DataAccessLayer.Mapper
             _command.Parameters.AddWithValue("@lastname", u.lastname);
             _command.Parameters.AddWithValue("@email", u.email);
             _command.Parameters.AddWithValue("@password", u.password);
-            _command.Parameters.AddWithValue("@rol", "client");
+            _command.Parameters.AddWithValue("@rol", u.rol);
+
+            if (_command.ExecuteNonQuery() > 0)
+            {
+                return JsonConvert.SerializeObject(new
+                {
+                    status = 1,
+                });
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new
+                {
+                    status = 0
+                });
+            }
+        }
+        public string deleteClient(user u)
+        {
+            _connection.Open();
+            _command = new SqlCommand(_query.deleteClient(), _connection);
+
+            _command.Parameters.AddWithValue("@id", u.id);
+            _command.Parameters.AddWithValue("@name", u.name);
+            _command.Parameters.AddWithValue("@lastname", u.lastname);
+            _command.Parameters.AddWithValue("@email", u.email);
+            _command.Parameters.AddWithValue("@password", u.password);
+            _command.Parameters.AddWithValue("@isActive", u.isActive);
+            _command.Parameters.AddWithValue("@rol", u.rol);
 
             if (_command.ExecuteNonQuery() > 0)
             {

@@ -17,5 +17,9 @@ namespace R_RApi.DataAccessLayer.Queries
         {
             return "UPDATE [user] SET name=@name, lastname=@lastname, email=@email, password=@password where id=@id";
         }
+        public string deleteClient()
+        {
+            return "UPDATE [user] SET name=@name, lastname=@lastname, email=@email, password=@password, isActive=@isActive where id=@id";
+        }
     }
 }

@@ -6,6 +6,7 @@ namespace R_RApi.DomainLayer.Services
     {
         public string signUp(user u);
         public string editClient(user u);
+        public string deleteClient(user u);
         public string login(string email, string pass);
     }
 }
