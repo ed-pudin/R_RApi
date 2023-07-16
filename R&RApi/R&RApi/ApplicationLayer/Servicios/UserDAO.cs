@@ -18,5 +18,11 @@ namespace R_RApi.ApplicationLayer.Servicios
             UserMappper mapper = new UserMappper();
             return mapper.login(email, pass);
         }
+        public string editClient(user u)
+        {
+            UserMappper mapper = new UserMappper();
+            return mapper.editClient(u);
+        }
+
     }
 }

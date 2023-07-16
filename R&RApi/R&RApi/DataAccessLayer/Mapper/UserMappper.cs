@@ -58,7 +58,7 @@ namespace R_RApi.DataAccessLayer.Mapper
         public string signup(user u)
         {
             _connection.Open();
-            _command = new SqlCommand(_query.signup(u), _connection);
+            _command = new SqlCommand(_query.signup(), _connection);
 
             _command.Parameters.AddWithValue("@name", u.name);
             _command.Parameters.AddWithValue("@lastname", u.lastname);
@@ -81,5 +81,33 @@ namespace R_RApi.DataAccessLayer.Mapper
                 });
             }
         }
+        public string editClient(user u)
+        {
+            _connection.Open();
+            _command = new SqlCommand(_query.editClient(), _connection);
+
+            _command.Parameters.AddWithValue("@id", u.id);
+            _command.Parameters.AddWithValue("@name", u.name);
+            _command.Parameters.AddWithValue("@lastname", u.lastname);
+            _command.Parameters.AddWithValue("@email", u.email);
+            _command.Parameters.AddWithValue("@password", u.password);
+            _command.Parameters.AddWithValue("@rol", "client");
+
+            if (_command.ExecuteNonQuery() > 0)
+            {
+                return JsonConvert.SerializeObject(new
+                {
+                    status = 1,
+                });
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new
+                {
+                    status = 0
+                });
+            }
+        }
+
     }
 }
