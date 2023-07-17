@@ -6,13 +6,13 @@
 
         public string addProduct() 
         {
-            return "INSERT INTO product (name, description, quantity, price, isActive)" +
-                    "VALUES (@name, @description, @quantity, @price, @isActive)";
+            return "INSERT INTO product (id, name, description, quantity, price)" +
+                    "VALUES (@id, @name, @description, @quantity, @price)";
         }
 
         public string getProduct()
         {
-            return "SELECT * FROM product";
+            return "SELECT * FROM product where id=@id";
         }
     }
 }

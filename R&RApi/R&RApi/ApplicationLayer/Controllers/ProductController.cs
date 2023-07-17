@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using R_RApi.ApplicationLayer.Servicios;
+using R_RApi.DataAccessLayer.Models;
 using System.Globalization;
 
 namespace R_RApi.ApplicationLayer.Controllers
@@ -8,12 +9,18 @@ namespace R_RApi.ApplicationLayer.Controllers
     [Route("[controller]")]
     public class ProductController : ControllerBase
     {
-        [HttpGet(Name ="getProducts")]
-        public string getProducts(string id, string name, string description, int quantity, float price, bool isActive)
+        [HttpGet("GetProduct/{id}")]
+        public string getProducts(string id)
         {
             ProductDAO productsDAO = new ProductDAO();
-            return new string(productsDAO.getProduct(id, name, description, quantity, price, isActive));
+            return new string(productsDAO.getProduct(id));
         }
 
+        [HttpPost("AddProduct")]
+        public string addProducts(product p)
+        {
+            ProductDAO productsDAO = new ProductDAO();
+            return new string(productsDAO.addProduct(p));
+        }
     }
 }

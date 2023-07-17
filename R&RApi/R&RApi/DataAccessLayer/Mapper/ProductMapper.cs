@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using R_RApi.DataAccessLayer.Models;
 using R_RApi.DataAccessLayer.Queries;
+using R_RApi.InfrastructureLayer.Authentication;
 using System.Data.SqlClient;
 
 namespace R_RApi.DataAccessLayer.Mapper
@@ -20,51 +21,46 @@ namespace R_RApi.DataAccessLayer.Mapper
             _query = new ProductQuery();
         }
 
-        //public string AddProduct(string name, string description, int quantity, float price, bool isActive)
-        //{
-        //    try
-        //    {
-        //        if (string.IsNullOrEmpty(name) || quantity <= 0)
-        //        {
-        //            var successMessage = new { message = "Los datos del producto son incorrectos." };
-        //            return JsonConvert.SerializeObject(successMessage);
-        //            //Console.WriteLine("Los datos del producto son incorrectos");
-        //        }
+        public string addProduct(product p)
+        {
+            try
+            {
+                _connection.Open();
+                _command = new SqlCommand(_query.addProduct(), _connection);
 
-        //        _connection.Open();
-        //        _command = new SqlCommand(_query.addProduct(), _connection);
+                _command.Parameters.AddWithValue("@id", p.id);
+                _command.Parameters.AddWithValue("@name", p.name);
+                _command.Parameters.AddWithValue("@description", p.description);
+                _command.Parameters.AddWithValue("@quantity", p.quantity);
+                _command.Parameters.AddWithValue("@price", p.price);
 
-        //        _command.Parameters.AddWithValue("@name", name);
-        //        _command.Parameters.AddWithValue("@description", description);
-        //        _command.Parameters.AddWithValue("@quantity", quantity);
-        //        _command.Parameters.AddWithValue("@price", price);
-        //        _command.Parameters.AddWithValue("@isActive", isActive);
+                if (_command.ExecuteNonQuery() > 0)
+                {
+                    return JsonConvert.SerializeObject(new
+                    {
+                        status = 1,
+                    });
+                }
+                else
+                {
+                    return JsonConvert.SerializeObject(new
+                    {
+                        status = 0,
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new
+                {
+                    status = ex.Message,
+                });
+            }
 
-        //        int rowsAffected = _command.ExecuteNonQuery();
+        }
 
-        //        if (rowsAffected > 0)
-        //        {
-        //            var successMessage = new { message = "El producto se ha agregado correctamente." };
-        //            return JsonConvert.SerializeObject(successMessage);
-        //            //Console.WriteLine("El producto se ha agregado correctamente.");
-        //        }
-        //        else
-        //        {
-        //            var errorMessage = new { message = "El producto se ha agregado correctamente." };
-        //            return JsonConvert.SerializeObject(errorMessage);
-        //            //Console.WriteLine("No se pudo agregar el producto.");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Error: " + ex.Message);
-        //    }
+        public string getProduct(string id) {
             
-        //}
-
-        public string GetProduct(string id, string name, string description, int quantity, float price, bool isActive) {
-            
-            List<product> products = new List<product>();
 
             try
             {
@@ -72,14 +68,11 @@ namespace R_RApi.DataAccessLayer.Mapper
                 _command = new SqlCommand(_query.getProduct(), _connection);
 
                 _command.Parameters.AddWithValue("@id", id);
-                _command.Parameters.AddWithValue("@name",name);
-                _command.Parameters.AddWithValue("@description", description);
-                _command.Parameters.AddWithValue("@quantity", quantity);
-                _command.Parameters.AddWithValue("@price", price);
-                _command.Parameters.AddWithValue("@isActive", isActive);
 
-                while (_reader.Read())
+                _reader = _command.ExecuteReader();
+                if (_reader.Read())
                 {
+                   
                     product productM = new product
                     {
                         id = _reader["id"].ToString(),
@@ -89,15 +82,28 @@ namespace R_RApi.DataAccessLayer.Mapper
                         price = Convert.ToSingle(_reader["price"]),
                         isActive = Convert.ToBoolean(_reader["isActive"])
                     };
-                    products.Add(productM);
+                    
+                    return JsonConvert.SerializeObject(productM);
+
                 }
+                else
+                {
+                    return JsonConvert.SerializeObject(new
+                    {
+                        status = 0
+                    });
+                }
+               
+               
             }
             catch(Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                return JsonConvert.SerializeObject(new
+                {
+                    status = ex.Message
+                });
             }
 
-            return JsonConvert.SerializeObject(products);
         }
     }
 }
