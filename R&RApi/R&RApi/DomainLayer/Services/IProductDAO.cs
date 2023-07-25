@@ -1,4 +1,5 @@
-﻿using R_RApi.DataAccessLayer.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using R_RApi.DataAccessLayer.Models;
 
 namespace R_RApi.DomainLayer.Services
 {
@@ -7,6 +8,7 @@ namespace R_RApi.DomainLayer.Services
         public string addProduct(product p);
 
         public string getProduct(string id);
+        public ResponseApi getProducts();
 
     }
 }

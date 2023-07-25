@@ -1,8 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using R_RApi.DataAccessLayer.Models;
 using R_RApi.DataAccessLayer.Queries;
+using R_RApi.DomainLayer.Services;
 using R_RApi.InfrastructureLayer.Authentication;
 using System.Data.SqlClient;
+using System.Text.Json;
 
 namespace R_RApi.DataAccessLayer.Mapper
 {
@@ -21,7 +24,7 @@ namespace R_RApi.DataAccessLayer.Mapper
             _query = new ProductQuery();
         }
 
-        public string addProduct(product p)
+        public ResponseApi addProduct(product p)
         {
             try
             {
@@ -36,31 +39,23 @@ namespace R_RApi.DataAccessLayer.Mapper
 
                 if (_command.ExecuteNonQuery() > 0)
                 {
-                    return JsonConvert.SerializeObject(new
-                    {
-                        status = 1,
-                    });
+                    return new ResponseApi(1, 200, "OK", null);
                 }
                 else
                 {
-                    return JsonConvert.SerializeObject(new
-                    {
-                        status = 0,
-                    });
+                    return new ResponseApi(0, 200, "Error al registrar", null);
+
                 }
             }
             catch (Exception ex)
             {
-                return JsonConvert.SerializeObject(new
-                {
-                    status = ex.Message,
-                });
+                return new ResponseApi(0, 400, ex.Message, null);
             }
 
         }
+        public ResponseApi getProduct(string id) {
 
-        public string getProduct(string id) {
-            
+            List<product> products = new List<product>();
 
             try
             {
@@ -82,28 +77,67 @@ namespace R_RApi.DataAccessLayer.Mapper
                         price = Convert.ToSingle(_reader["price"]),
                         isActive = Convert.ToBoolean(_reader["isActive"])
                     };
-                    
-                    return JsonConvert.SerializeObject(productM);
+
+                    products.Add(productM);
+
+                    return new ResponseApi(1, 200, "OK", products.Cast<dynamic>().ToList());
 
                 }
                 else
                 {
-                    return JsonConvert.SerializeObject(new
-                    {
-                        status = 0
-                    });
+                    return new ResponseApi(0, 200, "No se encontraron productos", null);
+
                 }
-               
-               
+
+
             }
             catch(Exception ex)
             {
-                return JsonConvert.SerializeObject(new
-                {
-                    status = ex.Message
-                });
+                return new ResponseApi(0, 400, ex.Message, null);
             }
 
         }
+        public ResponseApi getProducts()
+        {
+            List<product> products = new List<product>();
+
+            try
+            {
+                _connection.Open();
+                _command = new SqlCommand(_query.getProducts(), _connection);
+
+                _reader = _command.ExecuteReader();
+                
+                while (_reader.Read())
+                {
+                    product productM = new product
+                    {
+                        id = _reader["id"].ToString(),
+                        name = _reader["name"].ToString(),
+                        description = _reader["description"].ToString(),
+                        quantity = Convert.ToInt32(_reader["quantity"]),
+                        price = Convert.ToSingle(_reader["price"]),
+                        isActive = Convert.ToBoolean(_reader["isActive"])
+                    };
+                    products.Add(productM);
+                }
+                if(products.Count > 0)
+                {
+                    return new ResponseApi(1, 200, "OK", products.Cast<dynamic>().ToList());
+                }
+                else
+                {
+                    return new ResponseApi(0, 200, "No se encontraron productos", null);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ResponseApi(0, 400, ex.Message, null);
+
+            }
+
+        }
+
     }
 }

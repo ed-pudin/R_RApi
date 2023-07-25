@@ -1,4 +1,5 @@
-﻿using R_RApi.DataAccessLayer.Mapper;
+﻿using Microsoft.AspNetCore.Mvc;
+using R_RApi.DataAccessLayer.Mapper;
 using R_RApi.DataAccessLayer.Models;
 using R_RApi.DomainLayer.Services;
 
@@ -16,6 +17,11 @@ namespace R_RApi.ApplicationLayer.Servicios
         {
             ProductMapper productMapper = new ProductMapper();
             return productMapper.getProduct(id);
+        }
+        public ResponseApi getProducts()
+        {
+            ProductMapper productMapper = new ProductMapper();
+            return productMapper.getProducts();
         }
 
     }

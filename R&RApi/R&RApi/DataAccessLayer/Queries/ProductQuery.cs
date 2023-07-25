@@ -14,5 +14,9 @@
         {
             return "SELECT * FROM product where id=@id";
         }
+        public string getProducts()
+        {
+            return "SELECT * FROM product";
+        }
     }
 }
