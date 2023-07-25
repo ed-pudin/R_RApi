@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace R_RApi.DomainLayer.Services
+namespace R_RApi.DataAccessLayer.Response
 {
     public class ResponseApi
     {
@@ -12,7 +12,7 @@ namespace R_RApi.DomainLayer.Services
         public int statusCode { get; set; }
         public string message { get; set; }
         public List<dynamic> values { get; set; }
-        public ResponseApi(int status,int statusCode, string message, List<dynamic> values)
+        public ResponseApi(int status, int statusCode, string message, List<dynamic> values)
         {
             this.status = status;
             this.statusCode = statusCode;
@@ -20,6 +20,6 @@ namespace R_RApi.DomainLayer.Services
             this.values = values;
         }
 
-      
+
     }
 }

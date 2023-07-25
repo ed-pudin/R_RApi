@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using R_RApi.ApplicationLayer.Servicios;
 using R_RApi.DataAccessLayer.Models;
-using R_RApi.DomainLayer.Services;
+using R_RApi.DataAccessLayer.Response;
 
 namespace R_RApi.ApplicationLayer.Controllers
 {
@@ -10,10 +10,11 @@ namespace R_RApi.ApplicationLayer.Controllers
     public class ProductController : ControllerBase
     {
         [HttpGet("GetProduct/{id}")]
-        public string getProduct(string id)
+        public IActionResult getProduct(string id)
         {
             ProductDAO productsDAO = new ProductDAO();
-            return new string(productsDAO.getProduct(id));
+            ResponseApi productsResponse = productsDAO.getProduct(id);
+            return Ok(productsResponse);
         }
         [HttpGet("GetProducts")]
         public IActionResult getProducts()

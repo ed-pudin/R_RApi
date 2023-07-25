@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using R_RApi.DataAccessLayer.Models;
 using R_RApi.DataAccessLayer.Queries;
-using R_RApi.DomainLayer.Services;
+using R_RApi.DataAccessLayer.Response;
 using R_RApi.InfrastructureLayer.Authentication;
 using System.Data.SqlClient;
 using System.Text.Json;
