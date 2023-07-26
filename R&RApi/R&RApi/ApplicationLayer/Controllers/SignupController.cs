@@ -13,12 +13,12 @@ namespace R_RApi.ApplicationLayer.Controllers
     public class SignupController : ControllerBase
     {
         [HttpPost(Name = "Registro")]
-        public string signUp(user u)
+        public IActionResult signUp(user u)
         {
             //Obtener rol del token
             u.rol = "client";
             UserDAO userDAO = new UserDAO();
-            return new string(userDAO.signUp(u));
+            return Ok(userDAO.signUp(u));
         }
 
     }

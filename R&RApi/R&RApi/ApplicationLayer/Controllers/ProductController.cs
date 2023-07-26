@@ -25,10 +25,10 @@ namespace R_RApi.ApplicationLayer.Controllers
         }
 
         [HttpPost("AddProduct")]
-        public string addProducts(product p)
+        public IActionResult addProducts(product p)
         {
             ProductDAO productsDAO = new ProductDAO();
-            return new string(productsDAO.addProduct(p));
+            return Ok(productsDAO.addProduct(p));
         }
     }
 }

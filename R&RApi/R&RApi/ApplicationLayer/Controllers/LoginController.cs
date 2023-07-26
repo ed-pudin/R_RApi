@@ -10,12 +10,12 @@ namespace R_RApi.ApplicationLayer.Controllers
     public class LoginController : ControllerBase
     {
         [HttpPost(Name = "login")]
-        public string login(user data)
+        public IActionResult login(user data)
         {
             string email = data.email;
             string pass = data.password;
             UserDAO userDAO = new UserDAO();
-            return new string(userDAO.login(email, pass));
+            return  Ok(userDAO.login(email, pass));
         }
 
     }
