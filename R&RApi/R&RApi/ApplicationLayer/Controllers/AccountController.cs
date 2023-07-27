@@ -9,7 +9,7 @@ namespace R_RApi.ApplicationLayer.Controllers
     [Route("[controller]")]
     public class AccountController : ControllerBase
     {
-        [HttpPut("Edit/{id}")]
+        [HttpPut("EditAccount/{id}")]
         public IActionResult editClient(string id, user data)
         {
             data.id = id;

@@ -13,7 +13,6 @@ namespace R_RApi.ApplicationLayer.Servicios
             ProductMapper productMapper = new ProductMapper();
             return productMapper.addProduct(p);
         }
-
         public ResponseApi getProduct(string id)
         {
             ProductMapper productMapper = new ProductMapper();
@@ -24,6 +23,10 @@ namespace R_RApi.ApplicationLayer.Servicios
             ProductMapper productMapper = new ProductMapper();
             return productMapper.getProducts();
         }
-
+        public ResponseApi editProduct(string id, product p)
+        {
+            ProductMapper productMapper = new ProductMapper();
+            return productMapper.editProduct(id, p);
+        }
     }
 }

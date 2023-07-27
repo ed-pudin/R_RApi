@@ -30,5 +30,12 @@ namespace R_RApi.ApplicationLayer.Controllers
             ProductDAO productsDAO = new ProductDAO();
             return Ok(productsDAO.addProduct(p));
         }
+
+        [HttpPut("EditProduct/{id}")]
+        public IActionResult editProducts(string id, product p)
+        {
+            ProductDAO productsDAO = new ProductDAO();
+            return Ok(productsDAO.editProduct(id, p));
+        }
     }
 }

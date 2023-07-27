@@ -23,7 +23,36 @@ namespace R_RApi.DataAccessLayer.Mapper
 
             _query = new ProductQuery();
         }
+        public ResponseApi editProduct(string id, product p)
+        {
+            try
+            {
+                _connection.Open();
+                _command = new SqlCommand(_query.editProduct(), _connection);
 
+                _command.Parameters.AddWithValue("@newid", p.id);
+                _command.Parameters.AddWithValue("@name", p.name);
+                _command.Parameters.AddWithValue("@description", p.description);
+                _command.Parameters.AddWithValue("@quantity", p.quantity);
+                _command.Parameters.AddWithValue("@price", p.price);
+                _command.Parameters.AddWithValue("@id", id);
+
+                if (_command.ExecuteNonQuery() > 0)
+                {
+                    return new ResponseApi(1, 200, "OK", null);
+                }
+                else
+                {
+                    return new ResponseApi(0, 200, "Error al modificar", null);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ResponseApi(0, 400, ex.Message, null);
+            }
+
+        }
         public ResponseApi addProduct(product p)
         {
             try
