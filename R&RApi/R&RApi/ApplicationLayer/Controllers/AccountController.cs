@@ -19,14 +19,10 @@ namespace R_RApi.ApplicationLayer.Controllers
             return Ok(userDAO.editClient(data));
         }
         [HttpPut("Delete/{id}")]
-        public IActionResult deleteClient(string id, user data)
+        public IActionResult deleteClient(string id)
         {
-            data.id = id;
-            data.isActive = false;
-            //Obtener rol del token
-            data.rol = "client";
             UserDAO userDAO = new UserDAO();
-            return Ok(userDAO.deleteClient(data));
+            return Ok(userDAO.deleteClient(id));
         }
     }
 }

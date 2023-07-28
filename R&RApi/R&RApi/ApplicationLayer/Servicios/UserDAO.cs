@@ -23,10 +23,10 @@ namespace R_RApi.ApplicationLayer.Servicios
             UserMappper mapper = new UserMappper();
             return mapper.editClient(u);
         }
-        public ResponseApi deleteClient(user u)
+        public ResponseApi deleteClient(string id)
         {
             UserMappper mapper = new UserMappper();
-            return mapper.deleteClient(u);
+            return mapper.deleteClient(id);
         }
 
 

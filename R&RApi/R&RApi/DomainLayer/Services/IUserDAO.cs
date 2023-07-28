@@ -7,7 +7,7 @@ namespace R_RApi.DomainLayer.Services
     {
         public ResponseApi signUp(user u);
         public ResponseApi editClient(user u);
-        public ResponseApi deleteClient(user u);
+        public ResponseApi deleteClient(string id);
         public ResponseApi login(string email, string pass);
     }
 }

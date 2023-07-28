@@ -118,20 +118,15 @@ namespace R_RApi.DataAccessLayer.Mapper
                 return new ResponseApi(0, 400, ex.Message, null);
             }
         }
-        public ResponseApi deleteClient(user u)
+        public ResponseApi deleteClient(string id)
         {
             try
             {
                 _connection.Open();
                 _command = new SqlCommand(_query.deleteClient(), _connection);
 
-                _command.Parameters.AddWithValue("@id", u.id);
-                _command.Parameters.AddWithValue("@name", u.name);
-                _command.Parameters.AddWithValue("@lastname", u.lastname);
-                _command.Parameters.AddWithValue("@email", u.email);
-                _command.Parameters.AddWithValue("@password", u.password);
-                _command.Parameters.AddWithValue("@isActive", u.isActive);
-                _command.Parameters.AddWithValue("@rol", u.rol);
+                _command.Parameters.AddWithValue("@id", id);
+                _command.Parameters.AddWithValue("@isActive", false);
 
                 if (_command.ExecuteNonQuery() > 0)
                 {

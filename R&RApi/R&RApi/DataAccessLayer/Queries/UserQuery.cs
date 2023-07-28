@@ -19,7 +19,7 @@ namespace R_RApi.DataAccessLayer.Queries
         }
         public string deleteClient()
         {
-            return "UPDATE [user] SET name=@name, lastname=@lastname, email=@email, password=@password, isActive=@isActive where id=@id";
+            return "UPDATE [user] SET isActive=@isActive where id=@id";
         }
     }
 }
