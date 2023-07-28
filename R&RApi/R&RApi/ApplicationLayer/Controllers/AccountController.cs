@@ -18,7 +18,7 @@ namespace R_RApi.ApplicationLayer.Controllers
             UserDAO userDAO = new UserDAO();
             return Ok(userDAO.editClient(data));
         }
-        [HttpPut("Delete/{id}")]
+        [HttpPut("DeleteAccount/{id}")]
         public IActionResult deleteClient(string id)
         {
             UserDAO userDAO = new UserDAO();

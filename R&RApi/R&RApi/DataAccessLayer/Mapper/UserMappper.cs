@@ -110,7 +110,7 @@ namespace R_RApi.DataAccessLayer.Mapper
                 }
                 else
                 {
-                    return new ResponseApi(0, 200, "Error al editar", null);
+                    return new ResponseApi(0, 200, "Error al modificar", null);
                 }
             }
             catch (Exception ex)
@@ -134,7 +134,7 @@ namespace R_RApi.DataAccessLayer.Mapper
                 }
                 else
                 {
-                    return new ResponseApi(0, 200, "Error al editar", null);
+                    return new ResponseApi(0, 200, "Error al eliminar", null);
                 }
             }
             catch (Exception ex)

@@ -28,5 +28,10 @@ namespace R_RApi.ApplicationLayer.Servicios
             ProductMapper productMapper = new ProductMapper();
             return productMapper.editProduct(id, p);
         }
+        public ResponseApi deleteProduct(string id)
+        {
+            ProductMapper productMapper = new ProductMapper();
+            return productMapper.deleteProduct(id);
+        }
     }
 }

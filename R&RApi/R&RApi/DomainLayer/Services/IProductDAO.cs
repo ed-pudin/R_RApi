@@ -8,8 +8,8 @@ namespace R_RApi.DomainLayer.Services
     {
         public ResponseApi addProduct(product p);
         public ResponseApi editProduct(string id, product p);
+        public ResponseApi deleteProduct(string id);
         public ResponseApi getProduct(string id);
         public ResponseApi getProducts();
-
     }
 }

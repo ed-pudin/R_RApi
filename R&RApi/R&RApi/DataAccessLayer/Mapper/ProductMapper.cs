@@ -167,6 +167,31 @@ namespace R_RApi.DataAccessLayer.Mapper
             }
 
         }
+        public ResponseApi deleteProduct(string id)
+        {
+            try
+            {
+                _connection.Open();
+                _command = new SqlCommand(_query.deleteProduct(), _connection);
+
+                _command.Parameters.AddWithValue("@id", id);
+                _command.Parameters.AddWithValue("@isActive", false);
+
+                if (_command.ExecuteNonQuery() > 0)
+                {
+                    return new ResponseApi(1, 200, "OK", null);
+                }
+                else
+                {
+                    return new ResponseApi(0, 200, "Error al eliminar", null);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ResponseApi(0, 400, ex.Message, null);
+            }
+
+        }
 
     }
 }

@@ -14,6 +14,10 @@
             return "UPDATE product set id=@newid, name=@name, description=@description, quantity=@quantity," +
                 "price=@price where id=@id";
         }
+        public string deleteProduct()
+        {
+            return "UPDATE product set isActive=@isActive where id=@id";
+        }
         public string getProduct()
         {
             return "SELECT * FROM product where id=@id";
