@@ -10,13 +10,13 @@ using System.Net;
 
 namespace R_RApi.DataAccessLayer.Mapper
 {
-    public class UserMappper
+    public class UserMapper
     {
         SqlConnection _connection;
         SqlCommand _command;
         UserQuery _query;
         SqlDataReader _reader;
-        public UserMappper() {
+        public UserMapper() {
             Connection connection = new Connection();
             _connection = connection.sqlCon();
 
