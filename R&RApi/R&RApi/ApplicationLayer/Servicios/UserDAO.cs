@@ -9,23 +9,23 @@ namespace R_RApi.ApplicationLayer.Servicios
     {
         public ResponseApi signUp(user u)
         {
-            UserMappper mapper = new UserMappper();
+            UserMapper mapper = new UserMapper();
             return mapper.signup(u);
         }
 
         public ResponseApi login(string email, string pass)
         {
-            UserMappper mapper = new UserMappper();
+            UserMapper mapper = new UserMapper();
             return mapper.login(email, pass);
         }
         public ResponseApi editClient(user u)
         {
-            UserMappper mapper = new UserMappper();
+            UserMapper mapper = new UserMapper();
             return mapper.editClient(u);
         }
         public ResponseApi deleteClient(string id)
         {
-            UserMappper mapper = new UserMappper();
+            UserMapper mapper = new UserMapper();
             return mapper.deleteClient(id);
         }
 
