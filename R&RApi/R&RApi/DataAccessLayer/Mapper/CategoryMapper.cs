@@ -44,6 +44,7 @@ namespace R_RApi.DataAccessLayer.Mapper
             }
 
         }
+
         public ResponseApi editCategory(string id, category c)
         {
             try
@@ -70,6 +71,5 @@ namespace R_RApi.DataAccessLayer.Mapper
             }
 
         }
-
     }
 }
