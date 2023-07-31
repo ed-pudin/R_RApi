@@ -107,6 +107,5 @@ namespace R_RApi.DataAccessLayer.Mapper
                 return new ResponseApi(0, 400, ex.Message, null);
             }
         }
-
     }
 }
