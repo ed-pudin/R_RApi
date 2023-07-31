@@ -45,5 +45,31 @@ namespace R_RApi.DataAccessLayer.Mapper
 
         }
 
+        public ResponseApi editCategory(string id, category c)
+        {
+            try
+            {
+                _connection.Open();
+                _command = new SqlCommand(_query.editCategory(), _connection);
+
+                _command.Parameters.AddWithValue("@name", c.name);
+                _command.Parameters.AddWithValue("@id", id);
+
+                if (_command.ExecuteNonQuery() > 0)
+                {
+                    return new ResponseApi(1, 200, "OK", null);
+                }
+                else
+                {
+                    return new ResponseApi(0, 200, "Error al modificar", null);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ResponseApi(0, 400, ex.Message, null);
+            }
+
+        }
     }
 }

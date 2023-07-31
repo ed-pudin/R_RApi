@@ -15,5 +15,11 @@ namespace R_RApi.ApplicationLayer.Controllers
             return Ok(catDAO.addCategory(data));
         }
 
+        [HttpPut("EditCategory/{id}")]
+        public IActionResult editCategory(string id, category data)
+        {
+            CategoryDAO catDAO = new CategoryDAO();
+            return Ok(catDAO.editCategory(id, data));
+        }
     }
 }

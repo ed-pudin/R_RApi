@@ -7,5 +7,9 @@
         {
             return "INSERT INTO category (name) VALUES (@name)";
         }
+        public string editCategory()
+        {
+            return "UPDATE category SET name=@name where id=@id";
+        }
     }
 }

@@ -20,7 +20,8 @@ namespace R_RApi.ApplicationLayer.Servicios
 
         public ResponseApi editCategory(string id, category p)
         {
-            throw new NotImplementedException();
+            CategoryMapper categoryMapper = new CategoryMapper();
+            return categoryMapper.editCategory(id, p);
         }
 
         public ResponseApi getCategories()
