@@ -11,5 +11,9 @@
         {
             return "UPDATE category SET name=@name where id=@id";
         }
+        public string getCategories()
+        {
+            return "SELECT * FROM category";
+        }
     }
 }

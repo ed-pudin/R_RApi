@@ -26,7 +26,8 @@ namespace R_RApi.ApplicationLayer.Servicios
 
         public ResponseApi getCategories()
         {
-            throw new NotImplementedException();
+            CategoryMapper categoryMapper = new CategoryMapper();
+            return categoryMapper.getCategories();
         }
     }
 }

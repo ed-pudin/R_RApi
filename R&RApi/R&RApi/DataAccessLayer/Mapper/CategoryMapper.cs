@@ -44,7 +44,6 @@ namespace R_RApi.DataAccessLayer.Mapper
             }
 
         }
-
         public ResponseApi editCategory(string id, category c)
         {
             try
@@ -70,6 +69,43 @@ namespace R_RApi.DataAccessLayer.Mapper
                 return new ResponseApi(0, 400, ex.Message, null);
             }
 
+        }
+        public ResponseApi getCategories()
+        {
+            try
+            {
+                List<category> categories = new List<category>();
+
+                _connection.Open();
+                _command = new SqlCommand(_query.getCategories(), _connection);
+
+                _reader = _command.ExecuteReader();
+
+                while (_reader.Read())
+                {
+                    category categoryM = new category
+                    {
+                        id = _reader["id"].ToString(),
+                        name = _reader["name"].ToString()
+                    };
+
+                    categories.Add(categoryM);
+                }
+                if (categories.Count > 0)
+                {
+                    return new ResponseApi(1, 200, "OK", categories.Cast<dynamic>().ToList());
+                }
+                else
+                {
+                    return new ResponseApi(0, 200, "No se encontraron categorias", null);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return new ResponseApi(0, 400, ex.Message, null);
+            }
         }
     }
 }
