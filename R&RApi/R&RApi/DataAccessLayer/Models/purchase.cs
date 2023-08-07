@@ -7,6 +7,7 @@
         public float? subTotalService { get; set; }
         public float? subTotalProducts { get; set; }
         public float? payment { get; set; }
+        public float? change { get; set; }
         public float? total { get; set; }
     }
 }

@@ -1,9 +1,11 @@
-﻿namespace R_RApi.DomainLayer.Services
+﻿using R_RApi.DataAccessLayer.Models;
+using R_RApi.DataAccessLayer.Response;
+
+namespace R_RApi.DomainLayer.Services
 {
     public interface IPurchaseDAO
     {
-        public string purchase(string service, float subTotalService, float subTotalProducts,
-                                float payment, float total );
+        public ResponseApi addPurchase( purchase pu );
 
     }
 }
